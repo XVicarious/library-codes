@@ -1,0 +1,43 @@
+Version 1.0.42 - 2019-12-30   Technical changes after Python 3.8 testing with Calibre 4.99.2
+Version 1.0.41 - 2019-04-30    Python 3 compatibility
+Version 1.0.40 - 2019-04-27    Python 3 compatibility & Calibre Version 3.41.3 pdf-to-html compatibility (ISSN extraction from PDFs)
+Version 1.0.39 - 2019-04-13    Use standard Calibre's BeautifulSoup, and choose bs3 .findAll or bs4 .find_all dynamically based on its attributes
+Version 1.0.38 - 2018-10-15    Version 1.037 functionality has been removed in favor of using the Job Spy plugin's Scrub Tags tool.
+Version 1.0.37 - 2018-10-14    LCEAD Tags and FAST Tags: option to prepend any specified prefix to each Tag.
+Version 1.0.36 - 2018-10-12    FAST Tags: more work.
+Version 1.0.35 - 2018-10-11    FAST Tags added to LC Customization.  FAST retrieved as Tag-Like.
+Version 1.0.34 - 2018-05-17    Function "Find Alternatives to a Non-Responsive ISBN" has been redesigned due to current Google Search Books API restrictions.
+Version 1.0.33 - 2018-05-16    Function "Extraction of ISSN from PDF periodicals" changed to reflect Calibre changes to its pdf-to-html function.
+Version 1.0.32 - 2018-05-15    Techncial and functional enhancements to ISBN scrubbing.
+Version 1.0.31 - 2018-05-13    Enhanced scrubbing of ISBNs.
+Version 1.0.30 - 2017-05-21    Technical changes.
+Version 1.0.29 - 2017-05-11    Technical changes for Calibre 3.0.0 compatibility.
+Version 1.0.28 - 2017-05-05    Allow themes with user-defined icons.
+Version 1.0.27 - 2016-06-24    Compatibility improvement for use with Linux and OSX
+Version 1.0.26 - 2016-05-26    Bug fix.
+Version 1.0.25 - 2016-05-25    Technical changes.
+Version 1.0.24 - 2016-04-02    DDC Pie Charts
+Version 1.0.23 - 2016-03-26    Attempt to solve OSX subprocess issue.
+Version 1.0.22 - 2016-03-23    Technical changes.
+Version 1.0.21 - 2016-03-22    Revised LCC to Genre mapping logic, plus a corresponding template CSV file.
+Version 1.0.20 - 2016-03-21    New:  Updating of #genre (or any other text custom column) by mapping the DDC or LCC to Table _lc_genre_mapping, which is automatically seeded with over 2,470 DDC rows.
+Version 1.0.19 - 2016-02-14    Miscellaneous enhancements.
+Version 1.0.18 - 2016-02-13    Technical changes to improve performance in extracting ISSNs from PDFs.
+Version 1.0.17 - 2016-02-13    New: ISSN Extraction from Magazine/Periodical PDFs for use in deriving DDC, LOC, etc.
+Version 1.0.16 - 2016-01-30    Technical changes to improve performance in webscraping.
+Version 1.0.15 -  2015-12-04   New Menu Option:  Attempt to Substitute Non-Responsive ISBN Using Author/Title [Selected Single Book]; Technical tweaks.
+Version 1.0.14 -  2015-12-02   Many enhancements, especially to using 'OCLC-OWI" to retrieve 'OCLC' which in turn is used to retrieve 'LOC_LCCN'.  Menu and ToolTips changes.  BISAC-type LCEAD column data for Fiction is now retrieved (Non-Fiction already was).
+Version 1.0.13 -  2015-11-30   New Identifier:  'LOC_LCCN', which is the  'Library of Congress-LCCN'.  For books assigned LOC LCCNs after the year 1999, they (probably) have a permalink of: http://lccn.loc.gov/NNNNNNNNNN where the LCCN is a 10-digit number starting with the year (2NNN)
+Version 1.0.12 -  2015-11-25   Technical tweak.
+Version 1.0.11 -  2015-11-25   Additional LCEAD using OCLC.  Most useful for Factual/Non-Fiction.  Since LCEAD column is Tag-Like, any 'commas' have been replaced with the 'comma-like' Unicode symbol 'ˏ' that does not confuse Calibre.
+Version 1.0.10 -  2015-11-24   New Identifier:  OCLC (Not the same as OCLC-OWI).  OCLC is extremely useful in retrieving LCEAD data.
+Version 1.0.9 -  2015-11-23     New Optional Custom Column: LC Extra Author Details (LCEAD), which is a Tag-Like column that is updated with additional author-related information.  It is automatically updated when deriving DDC/LCC, but can be separately updated via its own menu option that uses OCLC-OWI to obtain the LCEAD values.
+Version 1.0.8 -  2015-11-21     Deriving ISNI and LCCN Identifiers from VIAF Author ID:  speed of download improved significantly.
+Version 1.0.7 -  2015-11-20     New option to delete all non-Library Codes Identifiers.
+Version 1.0.6 -  2015-11-20     2 New Identifiers:  ISNI and LCCN derived from VIAF Author ID to enable hot-linking to ISNI.org and Worldcat.org, respectively.  This is done whenever a OCLC-OWI Identifier is otherwise created.
+Version 1.0.5 -  2015-11-19     Creation of 2 Identifiers, VIAF.org Author ID and Library of Congress Author Name ID, whenever OCLC-OWI Identifier is otherwise created.  This allows the use of composite custom columns to hot-link to the respective URLs to view extended Author and Book information.
+Version 1.0.4 -  2015-11-17     New option to convert ISBN-10s to ISBN-13s.
+Version 1.0.3 -  2015-11-16     New option to derive DDC and/or LCC indirectly using Author/Title via OCLC-OWI Identifiers for cases where ISBN is not useful or reliable.
+Version 1.0.2 -  2015-11-13     Menu changes.
+Version 1.0.1 -  2015-11-12     Technical tweak.
+Version 1.0.0 -  2015-11-03     Initial release.
