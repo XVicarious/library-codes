@@ -85,7 +85,7 @@ def library_codes_generic_webscraping_api(source_type,source_dict,another_dict):
     #-----------------------------------------------
     #-----------------------------------------------
     #-----------------------------------------------
-    def parse_html_viaf(v,html_page,html_raw):
+    def parse_html_viaf(v,soup):
 
         # v = viaf
 
@@ -93,61 +93,19 @@ def library_codes_generic_webscraping_api(source_type,source_dict,another_dict):
         new_row2 = None
 
         try:
-            html_page = unicode_type(html_page)
-            text_list = html_page.split("source nsid")
-            #~ if DEBUG: print("# rows: ", unicode_type(len(text_list)))
-            for row in text_list:
-                s = unicode_type(row)
-                t = unicode_type("ISNI|")
-                if s.count(t) > 0:  #  <a href="/viaf/sourceID/ISNI|0000000121340483">ISNI|0000000121340483</a>
-                    s = s.strip()
-                    s_split = s.split('|')
-                    if s_split:
-                        if len(s_split) > 0:
-                            s = s_split[1]
-                            myre = '[0-9]+'
-                            match1 = re.match(myre,s)
-                            if match1:
-                                isni = match1.group(0)
-                                isni = isni.strip()
-                                if DEBUG: print("isni is: ", unicode_type(isni))
-                                new_row1 = "isni",v,isni
-                                break
-            #END FOR
-            del text_list
-
+            for src in soup.findAll('ns1:source'):  # Find all of the 'ns1:source'
+                if not new_row1 and src.text.startswith("ISNI"):  # Find ISNI
+                    isni = src['nsid']
+                    if DEBUG: print("isni is: ", unicode_type(isni))
+                    new_row1 = "isni",v,isni
+                if not new_row2 and src.text.startswith("LC|n"):  # Find LC
+                    lccn = 'lccn-' + src['nsid']
+                    if DEBUG: print("lccn is: ", unicode_type(lccn))
+                    new_row2 = "lccn",v,lccn
+            # fixme: Based on the following snippet, 'ns2:source' is also valid
             #  <a href="http://www.worldcat.org/identities/lccn-n2001-90808">WorldCat Identities</a>
             #~ <ns2:source nsid="n50012900">LC|n  50012900</ns2:source>
             #~  LC|n  50012900
-            contents = unicode_type(html_raw)
-            tmp_list = contents.split("<ns2:")
-            if tmp_list:
-                #~ if DEBUG: print("length of tmp_list: ", unicode_type(len(tmp_list)))
-                for row in tmp_list:
-                    s = unicode_type(row)
-                    if unicode_type('LC|n') in s:
-                        s_split = s.split('LC|n')
-                        if s_split:
-                            if len(s_split) > 0:
-                                lccn = s_split[1]
-                                lccn = lccn.strip()
-                                lccn = "lccn-n" + lccn
-                                lccn = lccn.replace(" ","")
-                                n = lccn.find("<")
-                                if n > 0:
-                                    lccn = lccn[0:n]
-                                n = lccn.find('"')
-                                if n > 0:
-                                    lccn = lccn[0:n]
-                                if DEBUG: print("lccn is: ", unicode_type(lccn))
-                                new_row2 = "lccn",v,lccn
-                                break
-                    else:
-                        continue
-                #END FOR
-            else:
-                if DEBUG: print("no data for lccn")
-                pass
         except Exception as e:
             if DEBUG: print(unicode_type(e))
             pass
@@ -476,7 +434,7 @@ def library_codes_generic_webscraping_api(source_type,source_dict,another_dict):
         if not v in already_retrieved_list:
             if source_type == SOURCE_TYPE_VIAF:
                 html_page,soup,html_raw = download_html(target_url)
-                new_row1,new_row2 = parse_html_viaf(v,html_page,html_raw)
+                new_row1,new_row2 = parse_html_viaf(v,soup)
                 already_retrieved_list.append(v)
             elif source_type == SOURCE_TYPE_OCLC:
                 html_page,soup,html_raw = download_html(target_url)
